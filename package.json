@@ -1,13 +1,13 @@
 {
   "name": "vue-strap",
   "version": "1.0.8",
-  "description": "Bootstrap components built with Vue.js",
+  "description": "Simple Trade",
   "main": "src/index.js",
   "repository": {
     "type": "git",
-    "url": "yuche/vue-strap"
+    "url": "https://github.com/weijiamo/leftright.git"
   },
-  "homepage": "http://yuche.github.io/vue-strap/",
+  "homepage": "https://github.com/weijiamo/leftright",
   "directories": {
     "src": "src/"
   },
@@ -54,8 +54,8 @@
     ]
   },
   "scripts": {
-    "docs": "webpack-dev-server --inline --hot --quiet",
-    "builddocs": "webpack --progress --hide-modules && NODE_ENV=production webpack --progress --hide-modules",
+    "st": "webpack-dev-server --inline --hot --quiet",
+    "buildst": "webpack --progress --hide-modules && NODE_ENV=production webpack --progress --hide-modules",
     "build": "webpack --progress --hide-modules --config  webpack.build.min.js && webpack --progress --hide-modules --config  webpack.build.js"
   },
   "author": "yuche",
