@@ -14,34 +14,9 @@
 </head>
 <body>
 <div id="wrapper">
-  <header-docs></header-docs>
-  <div class="bs-docs-header">
-        <div class="container">
-          <h1>VueStrap</h1>
-          <p>Bootstrap components built with <a target="_blank" href="http://vuejs.org/">Vue.js</a>.</p>
-          <p>No jQuery, bootstrap.js, or any 3rd party plugins required.</p>
-          <br>
-          <p>
-            <a class="btn btn-outline-inverse btn-lg" href="https://github.com/yuche/vue-strap">
-              Code on GitHub
-            </a>
-          </p>
-      </div>
-  </div>
   <container>
-    <div class="col-md-9">
-      <tabs-docs2></tabs-docs2>
-    </div>
-    <div class="col-md-3">
-    <affix>
-      <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm ">
-        <ul class="nav bs-docs-sidenav" id="sidenav">
-          <li v-for="a in anchor"><a href="#{{ a.toLowerCase() }}">{{ a | space}}</a></li>
-        </ul>
-        <a href="#top" class="back-to-top">Back to top</a>
-        <a href="https://github.com/yuche/vue-strap" class="back-to-top">GitHub</a>
-      </nav>
-    </affix>
+    <div class="col-md-12">
+      <stock-view></stock-view>
     </div>
   </container>
 </div>

@@ -19,7 +19,7 @@ require('./js/showLanguage')
 // import popoverDocs from './components/popoverDocs.vue'
 // import progressbarDocs from './components/progressbar-docs.vue'
 // import selectDocs from './components/selectDocs.vue'
-import tabsDocs2 from './components/tabsDocs.vue'
+import stockView from './components/StockView.vue'
 // import tooltipDocs from './components/tooltipDocs.vue'
 // import typeaheadDocs from './components/typeaheadDocs.vue'
 
@@ -44,7 +44,7 @@ new Vue({
     // popoverDocs,
     // progressbarDocs,
     // selectDocs,
-    tabsDocs2,
+    stockView,
     // tooltipDocs,
     // typeaheadDocs,
     list: {
