@@ -2,11 +2,11 @@ var webpack = require('webpack')
 var path = require('path')
 
 module.exports = {
-  entry: './docs/index.js',
+  entry: './src/index.js',
   output: {
     path: './build',
     publicPath: '/build/',
-    filename: 'build-docs.js'
+    filename: 'build-st.js'
   },
   resolve: {
     root: path.resolve('./')

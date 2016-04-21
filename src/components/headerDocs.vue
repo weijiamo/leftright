@@ -26,7 +26,7 @@
 </template>
 
 <script>
-  import navbar from 'src/Navbar.vue'
+  import navbar from 'vue-strap/src/Navbar.vue'
   export default {
     components: {
       navbar

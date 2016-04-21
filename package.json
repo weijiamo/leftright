@@ -1,6 +1,6 @@
 {
-  "name": "vue-strap",
-  "version": "1.0.8",
+  "name": "simple-trade",
+  "version": "1.0.0",
   "description": "Simple Trade",
   "main": "src/index.js",
   "repository": {
@@ -13,7 +13,8 @@
   },
   "dependencies": {
     "vue": "^1.0.8",
-    "bootstrap": "^3.3.5"
+    "bootstrap": "^3.3.5",
+    "vue-strap": "^1.0.0"
   },
   "files": [
     "LICENSE",
