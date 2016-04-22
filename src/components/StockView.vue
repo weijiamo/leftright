@@ -1,7 +1,6 @@
 <template>
   <div class="bs-docs-section" id="tabs">
-    <h1 class="page-header"><a href="#tabs" class="anchor">Tabs</a></h1>
-    <div class="bs-example">
+    <div v-gesture:swipe="test($event, 'tst')" class="bs-example">
       <tabs>
         <tab header="hello one">
           <p>
@@ -36,51 +35,6 @@
   </tab>
 </tabs>
 </script></code></pre>
-  <h2>Tabs Options</h2>
-  <table class="table table-bordered">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Default</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>active</td>
-        <td><code>Number</code></td>
-        <td></td>
-        <td>Active tab index (0 based)</td>
-      </tr>
-    </tbody>
-  </table>
-  <h2>Tab Options (NOT TABS)</h2>
-  <table class="table table-bordered">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Default</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>header</td>
-        <td><code>String</code></td>
-        <td></td>
-        <td>Heading text of the tab.</td>
-      </tr>
-      <tr>
-        <td>disabled</td>
-        <td><code>Boolean</code></td>
-        <td>false</td>
-        <td>Whether tab is clickable and can be activated. </td>
-      </tr>
-    </tbody>
-  </table>
-  </div>
 </template>
 
 <script>
@@ -90,6 +44,13 @@
     components: {
       tabs,
       tab
+    },
+    methods: {
+      test: function(event, msg) {
+        console.log(tabs);
+        //tabs.activeIndex = 2;
+        console.log(msg );
+      }
     }
   }
 </script>

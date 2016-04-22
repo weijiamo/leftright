@@ -12,8 +12,9 @@
     "src": "src/"
   },
   "dependencies": {
-    "vue": "^1.0.8",
     "bootstrap": "^3.3.5",
+    "vue": "^1.0.8",
+    "vue-gesture": "^1.0.7",
     "vue-strap": "^1.0.0"
   },
   "files": [
@@ -46,9 +47,14 @@
   },
   "browserify": {
     "transform": [
-    [
-       "babelify", { "presets": ["es2015"] }
-    ],
+      [
+        "babelify",
+        {
+          "presets": [
+            "es2015"
+          ]
+        }
+      ],
       [
         "vueify"
       ]

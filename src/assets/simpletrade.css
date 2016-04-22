@@ -859,15 +859,15 @@ h1[id] {
 
 .bs-example {
   position: relative;
-  padding: 45px 15px 15px;
+  padding: 0px 15px 15px;
   margin: 0 -15px 15px;
   border-color: #e5e5e5 #eee #eee;
   border-style: solid;
-  border-width: 1px 0;
+  border-width: 1px 0;  
   -webkit-box-shadow: inset 0 3px 6px rgba(0,0,0,.05);
           box-shadow: inset 0 3px 6px rgba(0,0,0,.05);
 }
-/* Echo out a label for the example */
+/* Echo out a label for the example 
 .bs-example:after {
   position: absolute;
   top: 15px;
@@ -878,7 +878,7 @@ h1[id] {
   text-transform: uppercase;
   letter-spacing: 1px;
   content: "Example";
-}
+}*/
 
 /* Tweak display of the code snippets when following an example */
 .bs-example + .highlight {

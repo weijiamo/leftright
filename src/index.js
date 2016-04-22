@@ -1,4 +1,4 @@
-require('./assets/docs.css')
+require('./assets/simpletrade.css')
 require('./assets/style.css')
 require('prismjs')
 require('./js/showLanguage')
@@ -22,7 +22,8 @@ require('./js/showLanguage')
 import stockView from './components/StockView.vue'
 // import tooltipDocs from './components/tooltipDocs.vue'
 // import typeaheadDocs from './components/typeaheadDocs.vue'
-
+var VueGesture = require('vue-gesture')
+Vue.use(VueGesture)
 Vue.config.debug = true
 
 new Vue({
