@@ -35,6 +35,8 @@
     },
     methods: {
       test: function(event, msg) {
+        //event.preventDefault()
+        event.stopPropagation()
         var tabs2 = Vue.component('tabs')
         console.log(this.$refs.mytabs);
         var index = this.$refs.mytabs.activeIndex + 1;
