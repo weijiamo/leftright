@@ -1,6 +1,6 @@
 <template>
   <div class="bs-docs-section" id="tabs">
-    <div v-gesture:swipe="test($event, 'tst')" class="bs-example">
+    <div v-gesture:swiperight="swipe($event, 'right')" v-gesture:swipeleft="swipe($event, 'left')" class="bs-example">
       <tabs v-ref:myTabs>
         <tab header="hello one">
           <p>
@@ -34,17 +34,24 @@
       kline
     },
     methods: {
-      test: function(event, msg) {
+      swipe: function(event, msg) {
         //event.preventDefault()
         event.stopPropagation()
-        var tabs2 = Vue.component('tabs')
-        console.log(this.$refs.mytabs);
-        var index = this.$refs.mytabs.activeIndex + 1;
-        if (this.$refs.mytabs.$children.length <= index) {
-          index = 0;
+        //console.log(this.$refs.mytabs);
+        var index = this.$refs.mytabs.activeIndex;
+        if (msg == 'left') {
+          index++;
+          if (this.$refs.mytabs.$children.length <= index) {
+            index = 0;
+          }
+        } else {
+            index--;
+            if (index < 0) {
+                index = this.$refs.mytabs.$children.length - 1;
+            }
         }
+        console.log(index);   
         this.$refs.mytabs.activeIndex = index;
-        console.log(index);    
       }
     }
   }
