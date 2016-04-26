@@ -1,8 +1,8 @@
 <template>
-  <div class="bs-docs-section" id="tabs">
-    <div v-gesture:swiperight="swipe($event, 'right')" v-gesture:swipeleft="swipe($event, 'left')" class="bs-example">
+  <div class="bs-docs-section {{'tabs-categary'}}" id="tabs" >
+    <div class="bs-example">
       <tabs v-ref:myTabs>
-        <tab header="hello one">
+        <tab header="One">
           <p>
             Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
             tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
@@ -12,11 +12,11 @@
              proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
           </p>
         </tab>
-        <tab header="hello two">
+        <tab header="Two">
            <kline></kline>
         </tab>
-        <tab header="three">
-          hello world!
+        <tab header="Three">
+          hello world!hello world!hello world!hello world!hello world!hello world!hello world!hello world!hello world!hello world!hello world!hello world!hello world!hello world!hello world!
         </tab>
       </tabs>
     </div>
@@ -32,6 +32,10 @@
       tabs,
       tab,
       kline
+    },
+    data: {
+      isA: true,
+      isB: false
     },
     methods: {
       swipe: function(event, msg) {
@@ -56,3 +60,13 @@
     }
   }
 </script>
+
+<style>
+  .tabs-categary li {
+    width: 33%;
+    height: 60px;
+    font-size: 26px;
+    text-align: center;
+    background: red;
+  }
+</style>

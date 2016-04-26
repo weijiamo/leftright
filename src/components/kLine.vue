@@ -9,7 +9,7 @@
       ready: function(event, msg) {
         var dataPoints = [];
     var y = 0;
-    var limit = 50000;
+    var limit = 360;
     
     for ( var i = 0; i < limit; i++ ) {
       
