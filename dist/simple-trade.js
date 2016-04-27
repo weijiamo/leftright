@@ -3071,4 +3071,4 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ ])
 });
 ;
-//# sourceMappingURL=vue-strap.js.map
+//# sourceMappingURL=simple-trade.js.map
