@@ -10,7 +10,7 @@
   <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" 
   <link rel="stylesheet" type="text/css" href="src/assets/prism-coy.css">
   <link rel="icon" href="favicon.ico" type="image/x-icon">
-<!--script type="text/javascript" src="/node_modules/canvasjs/dist/canvasjs.min.js"></script-->
+<script type="text/javascript" src="/node_modules/canvasjs/dist/canvasjs.min.js"></script>
   <!--script type="text/javascript" src="node_modules/load-js/index.js"></script-->
   <script src="/node_modules/jsinclude/dist/include.js"></script>
   <style type="text/css">
@@ -94,9 +94,10 @@
   
 </footer>
 <!-- using cdn version here so it works under gh-pages -->
-<!--script src="node_modules/vue/dist/vue.min.js"></script>
-<script src="build/build-st.js"></script-->
+<!----><script src="node_modules/vue/dist/vue.min.js"></script>
+<script src="build/build-st.js"></script>
   <script type="text/javascript">
+      var time = 0;
       include.once("/node_modules/jquery/dist/jquery.min.js", function () {
           console.log('jquery is loaded'); 
           // $("#module1").show();
@@ -111,23 +112,23 @@
                   setTimeout(function () {
                     $( ".welcome" ).hide();
                     $("#wrapper").show();
-                  }, 1500)
-                }, 1500)
-              }, 1500)
-            }, 1500)
-          }, 1500)
+                  }, time)
+                }, time)
+              }, time)
+            }, time)
+          }, time)
       });
       
-      include.once("/node_modules/vue/dist/vue.min.js", function () {
-        console.log('vue is loaded'); 
-       });
-      include.once("/node_modules/canvasjs/dist/canvasjs.min.js", function () {
-        console.log('canvasjs is loaded'); 
-       });
-      include.once("/dist/simple-trade.js", function () {
-        //$( ".welcome" ).hide();
-        console.log('simple is loaded'); 
-       });
+      // include.once("/node_modules/vue/dist/vue.min.js", function () {
+      //   console.log('vue is loaded'); 
+      //  });
+      // include.once("/node_modules/canvasjs/dist/canvasjs.min.js", function () {
+      //   console.log('canvasjs is loaded'); 
+      //  });
+      // include.once("/dist/simple-trade.js", function () {
+      //   //$( ".welcome" ).hide();
+      //   console.log('simple is loaded'); 
+      //  });
      
        include(function () {
         console.log('all includes are loaded');
@@ -147,7 +148,5 @@
           console.log("simple-trade.js");
         });*/
     </script>
-
-
 </body>
 </html>
