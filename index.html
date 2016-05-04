@@ -10,7 +10,7 @@
   <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" 
   <link rel="stylesheet" type="text/css" href="src/assets/prism-coy.css">
   <link rel="icon" href="favicon.ico" type="image/x-icon">
-<script type="text/javascript" src="/node_modules/canvasjs/dist/canvasjs.min.js"></script>
+  <script type="text/javascript" src="/node_modules/canvasjs/dist/canvasjs.min.js"></script>
   <!--script type="text/javascript" src="node_modules/load-js/index.js"></script-->
   <script src="/node_modules/jsinclude/dist/include.js"></script>
   <style type="text/css">
@@ -78,24 +78,25 @@
   </style>
 </head>
 <body>
-<div class="welcome">敬請期待</div>
-<div class="welcome module" id="module1">模塊1</div>
-<div class="welcome module" id="module2">模塊2</div>
-<div class="welcome module" id="module3">模塊3</div>
-<div class="welcome module" id="module4">模塊4</div>
-<div id="wrapper">
-  <container>
-    <div class="col-md-12">
-      <stock-view></stock-view>
-    </div>
-  </container>
-</div>
-<footer class="bs-docs-footer">
-  
-</footer>
-<!-- using cdn version here so it works under gh-pages -->
-<!----><script src="node_modules/vue/dist/vue.min.js"></script>
-<script src="build/build-st.js"></script>
+  <div class="welcome">敬請期待</div>
+  <div class="welcome module" id="module1">模塊1</div>
+  <div class="welcome module" id="module2">模塊2</div>
+  <div class="welcome module" id="module3">模塊3</div>
+  <div class="welcome module" id="module4">模塊4</div>
+  <div id="wrapper">
+    <container>
+      <div class="col-md-12">
+        <welcome v-show="showWelcome"></welcome>
+        <stock-view v-show="showStock"></stock-view>
+      </div>
+    </container>
+  </div>
+  <footer class="bs-docs-footer">
+    
+  </footer>
+  <!-- using cdn version here so it works under gh-pages -->
+  <!----><script src="node_modules/vue/dist/vue.min.js"></script>
+  <script src="build/build-st.js"></script>
   <script type="text/javascript">
       var time = 0;
       include.once("/node_modules/jquery/dist/jquery.min.js", function () {
