@@ -1,11 +1,9 @@
 <template>
-  <div class="bs-docs-section" id="tooltip">
-    <kline></kline>
+  <div class="st-stock-detail">
   </div>
 </template>
 
 <script>
-  import kline from './kline.vue'
   export default {
     data() {
       return {
@@ -14,7 +12,6 @@
       }
     },
     components: {
-      kline
     }
   }
 </script>

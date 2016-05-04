@@ -1,6 +1,5 @@
 <template>
-  <div class="bs-docs-section" id="typeahead">
-    <h1 class="page-header"><a href="#typeahead" class="anchor">welcome you!</a></h1>
+  <div class="st-welcome">welcome you!</h1>
   </div>
 </template>
 
