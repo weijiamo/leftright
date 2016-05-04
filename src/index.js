@@ -5,6 +5,7 @@ require('./js/showLanguage')
 
 import stockView from './components/StockView.vue'
 import welcome from './components/welcome.vue'
+import deviceStatus from './components/deviceStatus.vue'
 var VueGesture = require('vue-gesture')
 Vue.use(VueGesture)
 Vue.config.debug = true
@@ -12,6 +13,7 @@ Vue.config.debug = true
 var app = new Vue({
   el: '#wrapper',
   components: {
+    'deviceStatus': deviceStatus,
     'welcome': welcome,
     'stockView': stockView
   },
@@ -21,6 +23,7 @@ var app = new Vue({
       anchor: [],
       showWelcome: false,
       showStock: true,
+      showDeviceStatus: true
     }
   },
   filters: {

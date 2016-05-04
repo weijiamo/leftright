@@ -86,6 +86,7 @@
   <div id="wrapper">
     <container>
       <div class="col-md-12">
+        <device-status v-show="showDeviceStatus"></device-status>
         <welcome v-show="showWelcome"></welcome>
         <stock-view v-show="showStock"></stock-view>
       </div>
