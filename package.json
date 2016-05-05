@@ -13,7 +13,6 @@
   },
   "dependencies": {
     "bootstrap": "^3.3.5",
-    "canvasjs": "^1.8.1",
     "jquery": "^2.2.3",
     "jsinclude": "^1.2.0",
     "load-js": "^1.0.0",

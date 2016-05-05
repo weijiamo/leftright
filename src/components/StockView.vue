@@ -2,17 +2,20 @@
   <div class="st-stock">
     <stock-navi></stock-navi>
     <stock-detail></stock-detail>
+    <stock-transaction></stock-transaction>
   </div>
 </template>
 
 <script>
   import stockNavi from './stockNavi.vue'
   import stockDetail from './stockDetail.vue'
+  import stockTransaction from './stockTransaction.vue'
   
   export default {
     components: {
       stockNavi,
-      stockDetail
+      stockDetail,
+      stockTransaction
     },
     data: {
     },
