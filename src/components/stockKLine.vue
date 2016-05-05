@@ -125,6 +125,7 @@
 
     var option = {
         title: {
+            show: false,
             text: '上证指数',
             left: 'center'
         },
@@ -136,8 +137,8 @@
         },
         grid: {
             left: '10%',
-            right: '10%',
-            bottom: '15%'
+            right: '1%',
+            bottom: '1%'
         },
         xAxis: {
             type: 'category',
@@ -176,7 +177,8 @@
                 type: 'candlestick',
                 data: data0.values
             }
-        ]
+        ],
+        animation: false
     };
 
     function formatDate(data) {

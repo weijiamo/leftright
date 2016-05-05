@@ -1,6 +1,5 @@
 <template>
   <div class="st-stock-detail">
-    <div class="bs-example">
       <tabs v-ref:myTabs>
         <tab header="行情">
           <stock-market></stock-market>

@@ -77,11 +77,13 @@
   </style>
 </head>
 <body>
-  <div class="welcome">敬請期待</div>
-  <div class="welcome module" id="module1">模塊1</div>
-  <div class="welcome module" id="module2">模塊2</div>
-  <div class="welcome module" id="module3">模塊3</div>
-  <div class="welcome module" id="module4">模塊4</div>
+  <div class="welcome">敬請期待
+    <div class="module" id="module1">模塊1</div>
+    <div class="module" id="module2">模塊2</div>
+    <div class="module" id="module3">模塊3</div>
+    <div class="module" id="module4">模塊4</div>
+  </div>
+  
   <div id="wrapper">
     <container>
       <div>
@@ -95,25 +97,55 @@
   <!----><script src="node_modules/vue/dist/vue.min.js"></script>
   <script src="build/build-st.js"></script>
   <script type="text/javascript">
+      var allLoaded = false;
+      document.addEventListener("deviceready", onDeviceReady, false);
+      function onDeviceReady() {
+          console.log('StatusBar');
+          console.log(StatusBar);
+          StatusBar.show();
+          if (!allLoaded) {
+            goApp();
+            allLoaded = true;
+          }
+          StatusBar.overlaysWebView(true);
+          // styles: Default : 0, LightContent: 1, BlackTranslucent: 2, BlackOpaque: 3
+          // StatusBar.style(1);
+          // supported names: black, darkGray, lightGray, white, gray, red, green,
+          // blue, cyan, yellow, magenta, orange, purple, brown
+          // StatusBar.styleColor('black');
+          // StatusBar.styleHex('#000');
+          StatusBar.hide();
+          StatusBar.show();
+
+          // var isVisible = $cordovaStatusbar.isVisible();
+      }
+
+      function goApp() {
+        document.getElementsByClassName("welcome")[0].style.display = "none";
+        document.getElementById("wrapper").style.display = "block";
+        console.log('go app');
+      }
       var time = 0;
       var _height = window.screen.height;
       var _fontSize = _height/50 + "px";
       console.log(_fontSize);
       document.getElementsByTagName("html")[0].style.fontSize = _fontSize;
-      include.once("/node_modules/jquery/dist/jquery.min.js", function () {
-          console.log('jquery is loaded'); 
+      include.once("/lib/cordova.js", function () {
+          console.log('cordova is loaded'); 
           // $("#module1").show();
           setTimeout(function () {
-            $("#module1").show();
+            document.getElementById("module1").style.display = "block";
             setTimeout(function () {
-              $("#module2").show();
+              document.getElementById("module2").style.display = "block";
               setTimeout(function () {
-                $("#module3").show();
+                document.getElementById("module3").style.display = "block";
                 setTimeout(function () {
-                  $("#module4").show();
+                  document.getElementById("module4").style.display = "block";
                   setTimeout(function () {
-                    $( ".welcome" ).hide();
-                    $("#wrapper").show();
+                    if (!allLoaded) {
+                      goApp();
+                      allLoaded = true;
+                    }
                   }, time)
                 }, time)
               }, time)
