@@ -19,12 +19,12 @@
 
 <style>
   .st-stock-transaction {
-    height: 153px;
+    height: 4rem;
     /* font-size: 26px; */
     /* text-align: center; */
     background: red;
     bottom: 0;
     position: fixed;
-    width: 1000px;
+    width: 100%;
   }
 </style>

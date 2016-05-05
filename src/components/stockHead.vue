@@ -12,7 +12,7 @@
 
 <style>
   .st-stock-market-head {
-    height: 100px;
+    height: 5rem;
     font-size: 26px;
     text-align: center;
     background: #0099FF;

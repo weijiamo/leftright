@@ -33,7 +33,7 @@
 
 <style>
   .st-stock-navi {
-    height: 60px;
+    height: 3.5rem;
     font-size: 26px;
     text-align: center;
     background: blue;

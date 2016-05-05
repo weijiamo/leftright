@@ -42,13 +42,3 @@
     }
   }
 </script>
-
-<style>
-  .tabs-categary li {
-    width: 33%;
-    height: 60px;
-    font-size: 26px;
-    text-align: center;
-    background: red;
-  }
-</style>

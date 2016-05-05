@@ -1,20 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" test="test">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no,minimal-ui">
   <title>Simple Trade</title>
-  <!-- <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,400,600|Source+Code+Pro' rel='stylesheet' type='text/css'> -->
-  <!--
-  <link rel="stylesheet" type="text/css" href="node_modules/bootstrap/dist/css/bootstrap.css">
-  -->
   <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" 
   <link rel="stylesheet" type="text/css" href="src/assets/prism-coy.css">
   <link rel="icon" href="favicon.ico" type="image/x-icon">
-  <script type="text/javascript" src="/node_modules/canvasjs/dist/canvasjs.min.js"></script>
-  <!--script type="text/javascript" src="node_modules/load-js/index.js"></script-->
   <script src="/node_modules/jsinclude/dist/include.js"></script>
   <script src="/lib/echarts.js"></script>
   <style type="text/css">
+    #body {
+    #  width: 100%;
+    #  height: 100rem;
+    #}
     .welcome {
       animation:fade 3000ms infinite;
       -webkit-animation:fade 3000ms infinite;
@@ -86,21 +84,22 @@
   <div class="welcome module" id="module4">模塊4</div>
   <div id="wrapper">
     <container>
-      <div class="col-md-12">
+      <div>
         <device-status v-show="showDeviceStatus"></device-status>
         <welcome v-show="showWelcome"></welcome>
         <stock-view v-show="showStock"></stock-view>
       </div>
     </container>
   </div>
-  <footer class="bs-docs-footer">
-    
-  </footer>
   <!-- using cdn version here so it works under gh-pages -->
   <!----><script src="node_modules/vue/dist/vue.min.js"></script>
   <script src="build/build-st.js"></script>
   <script type="text/javascript">
       var time = 0;
+      var _height = window.screen.height;
+      var _fontSize = _height/50 + "px";
+      console.log(_fontSize);
+      document.getElementsByTagName("html")[0].style.fontSize = _fontSize;
       include.once("/node_modules/jquery/dist/jquery.min.js", function () {
           console.log('jquery is loaded'); 
           // $("#module1").show();

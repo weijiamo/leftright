@@ -22,9 +22,9 @@
 
 <style>
   .st-stock-fundamental {
-    height: 100px;
+    height: 15rem;
     font-size: 26px;
     text-align: center;
-    background: #0099FF;
+    background: #00CCFF;
   }
 </style>

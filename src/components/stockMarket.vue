@@ -19,8 +19,8 @@
       }
     },
     components: {
-      stockKline,
       stockHead,
+      stockKline,
       stockFundamental
     }
   }
@@ -28,8 +28,8 @@
 
 <style>
   .st-stock-market-price {
-    height: 60px;
-    font-size: 26px;
+    height: 3.5rem;
+    font-size: 2rem;
     text-align: center;
     background: yellow;
   }

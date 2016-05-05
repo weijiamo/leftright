@@ -1,5 +1,5 @@
 <template>
-  <div class="bs-docs-section {{'tabs-categary'}}" id="tabs" >
+  <div class="st-stock-detail">
     <div class="bs-example">
       <tabs v-ref:myTabs>
         <tab header="行情">
@@ -62,11 +62,17 @@
 </script>
 
 <style>
-  .tabs-categary li {
+  .st-stock-detail li {
     width: 33%;
-    height: 60px;
-    font-size: 26px;
+    height: 2rem;
+    font-size: 1rem;
     text-align: center;
     background: red;
+  }
+  .st-stock-detail li a{
+    padding: 0.2rem 0.5rem
+  }
+  .st-stock-detail {
+    #height: 85rem;
   }
 </style>
