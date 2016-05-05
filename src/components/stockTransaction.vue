@@ -22,7 +22,7 @@
     height: 4rem;
     /* font-size: 26px; */
     /* text-align: center; */
-    background: red;
+    background: #00FF66;
     bottom: 0;
     position: fixed;
     width: 100%;

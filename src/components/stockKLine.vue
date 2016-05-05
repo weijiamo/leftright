@@ -1,10 +1,20 @@
 <template>
-  <div id="chartContainer" style="width: 100%;height:15rem;"></div>
+  <div id="chartContainer" style="width: {{deviceWidth}}px;height:15rem;"></div>
 </template>
 
 <script>
   export default {
   components: {
+  },
+  data() {
+    return {
+    }
+  },
+  computed: {
+    // a computed getter
+    deviceWidth: function () {
+      return window.screen.width
+    }
   },
   ready: function(event, msg) {
   // 基于准备好的dom，初始化echarts实例
