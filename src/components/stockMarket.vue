@@ -33,5 +33,6 @@
     text-align: left;
     padding-top: 0.5rem;
     #background: yellow;
+    background: white;
   }
 </style>
