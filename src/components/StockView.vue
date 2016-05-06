@@ -48,4 +48,8 @@
     ##F9F9F7
     background: red;
   }
+
+  body {
+    background: #F9F9F7;
+  }
 </style>
