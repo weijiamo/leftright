@@ -100,24 +100,11 @@
       var allLoaded = false;
       document.addEventListener("deviceready", onDeviceReady, false);
       function onDeviceReady() {
-          console.log('StatusBar');
-          console.log(StatusBar);
-          StatusBar.show();
+          console.log('onDeviceReady');
           if (!allLoaded) {
             goApp();
             allLoaded = true;
           }
-          StatusBar.overlaysWebView(true);
-          // styles: Default : 0, LightContent: 1, BlackTranslucent: 2, BlackOpaque: 3
-          // StatusBar.style(1);
-          // supported names: black, darkGray, lightGray, white, gray, red, green,
-          // blue, cyan, yellow, magenta, orange, purple, brown
-          // StatusBar.styleColor('black');
-          // StatusBar.styleHex('#000');
-          StatusBar.hide();
-          StatusBar.show();
-
-          // var isVisible = $cordovaStatusbar.isVisible();
       }
 
       function goApp() {
