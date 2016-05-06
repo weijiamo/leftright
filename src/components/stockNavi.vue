@@ -1,6 +1,16 @@
 <template>
-  <div class="st-stock-navi">腾讯控股
-  </div>
+  <table style="width:100%" class="st-stock-navi-back">
+    <tr>
+      <td style="width:10%"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span></td>
+      <td style="width:10%"></td>
+      <td style="width:60%">
+        <div class="st-stock-navi-title1">腾讯控股</div>
+        <div class="st-stock-navi-title2">开盘 08-08</div>
+      </td> 
+      <td style="width:10%"><span class="glyphicon glyphicon-star" aria-hidden="true"></span></td>
+      <td style="width:10%"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></td>
+    </tr>
+  </table>
 </template>
 
 <script>
@@ -32,10 +42,29 @@
 </script>
 
 <style>
-  .st-stock-navi {
+  .st-stock-navi-back {
+    color: #b88845;
     height: 3.5rem;
-    font-size: 26px;
+    font-size: 1.5rem;
     text-align: center;
-    #background: blue;
+  }
+  .st-stock-navi-back span{
+    top: 0.25rem;
+  }
+  .st-stock-navi-title1 {
+    font-size: 1.5rem;
+  }
+  .st-stock-navi-title2 {
+    font-size: 0.5rem;
+    color: gray;
+  }
+  .st-stock-navi-star {
+    font-size: 1.5rem;
+    text-align: center;
+  }
+  .st-stock-navi-edit {
+    color: #b88845;
+    font-size: 1.5rem;
+    text-align: center;
   }
 </style>
