@@ -42,3 +42,9 @@
     }
   }
 </script>
+
+<style>
+  .st-stock {
+    background: #FFFFFF;
+  }
+</style>

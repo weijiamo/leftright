@@ -36,6 +36,6 @@
     height: 3.5rem;
     font-size: 26px;
     text-align: center;
-    background: blue;
+    #background: blue;
   }
 </style>
