@@ -45,6 +45,7 @@
 
 <style>
   .st-stock {
-    background: #FFFFFF;
+    ##F9F9F7
+    background: red;
   }
 </style>

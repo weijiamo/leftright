@@ -47,24 +47,29 @@
     height: 3.5rem;
     font-size: 1.5rem;
     text-align: center;
+    background: #FFFFFF;
   }
   .st-stock-navi-back span{
     top: 0.25rem;
   }
   .st-stock-navi-title1 {
     font-size: 1.5rem;
+    background: #FFFFFF;
   }
   .st-stock-navi-title2 {
     font-size: 0.5rem;
     color: gray;
+    background: #FFFFFF;
   }
   .st-stock-navi-star {
     font-size: 1.5rem;
     text-align: center;
+    background: #FFFFFF;
   }
   .st-stock-navi-edit {
     color: #b88845;
     font-size: 1.5rem;
     text-align: center;
+    background: #FFFFFF;
   }
 </style>
