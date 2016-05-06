@@ -66,10 +66,14 @@
     height: 2rem;
     font-size: 1rem;
     text-align: center;
-    background: red;
+    background: #F9F9F7;
   }
   .st-stock-detail li a{
     padding: 0.2rem 0.5rem
+  }
+
+  .st-stock-detail .nav-tabs {
+    margin-bottom: 0px;
   }
   .st-stock-detail {
     #height: 85rem;

@@ -28,9 +28,10 @@
 
 <style>
   .st-stock-market-price {
-    height: 3.5rem;
+    height: 3.0rem;
     font-size: 2rem;
-    text-align: center;
-    background: yellow;
+    text-align: left;
+    padding-top: 0.5rem;
+    #background: yellow;
   }
 </style>

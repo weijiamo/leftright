@@ -31,8 +31,8 @@
 <style>
   .st-device-status {
     background: gray;
-    height: 2rem;
-    font-size: 20px;
+    height: 1.5rem;
+    font-size: 1rem;
     text-align: center;
   }
 </style>
