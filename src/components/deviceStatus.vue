@@ -13,7 +13,6 @@
       }
     },
     ready: function(event, msg) {
-      debugger;
       var me = this;
       document.addEventListener("deviceready", onDeviceReady, false);
       function onDeviceReady() {
