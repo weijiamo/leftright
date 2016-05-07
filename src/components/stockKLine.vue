@@ -1,8 +1,7 @@
 <template>
     <div class="chart-container">
       <div id="canvas" class="chart-canvas" 
-        v-touch-options:pan="{ direction: 'horizontal'}"
-        v-touch:pan.prevent.stop="onPan($event)">
+    >
       </div>
       <div class="tooltip" v-el:tooltip>
         <div class="tooltip-body">
@@ -89,6 +88,9 @@
     function extract(rawData) {
         var categoryData = [];
         var values = [];
+        var volume = [];
+        var ma = [];
+        var sum = 0;
         for (var i = 0, ln=rawData.secu_klineinfo.length; i < ln; i++) {
             var item = rawData.secu_klineinfo[i];
             var meta = item.basic_info;
@@ -98,10 +100,26 @@
             var date = time.substr(6);
             categoryData.push(year + '/' + month + '/' + date);
             values.push([meta.openprice, meta.closeprice, meta.lowprice, meta.highprice]);
+            volume.push({
+                value: meta.volume.low,
+                color: meta.closeprice > meta.openprice ? 'red': 'green'
+            });
+            sum += meta.closeprice;
+            var mean = 0;
+            var freq = 20;
+            if(i < freq) {
+                mean = sum / (i + 1);
+            } else {
+                sum -= rawData.secu_klineinfo[i - freq].basic_info.closeprice;
+                mean = sum / freq;
+            }
+            ma.push(mean);
         }
         return {
             categoryData: categoryData,
-            values: values
+            values: values,
+            volume: volume,
+            ma: ma
         };
     }
 
@@ -132,40 +150,71 @@
                 return this.$els.tooltip.innerHTML;
             }.bind(this)
         },
-        grid: {
-            left: '10%',
-            right: '1%',
-            // bottom: '10%'
-        },
-        xAxis: {
+        grid: [{
+            left: 60,
+            right: 5,
+            height: '40%'
+        }, {
+            left: 60,
+            right: 5,
+            height: '20%',
+            top: '60%'
+        }],
+        xAxis: [{
             type: 'category',
             data: data0.categoryData,
             scale: true,
-            boundaryGap : false,
+            boundaryGap : true,
             axisLine: {onZero: false},
             splitLine: {show: false},
             splitNumber: 20,
             min: 'dataMin',
-            max: 'dataMax'
-        },
-        yAxis: {
+            max: 'dataMax',
+            axisLabel: {
+                show: false
+            }
+        }, {
+            type: 'category',
+            data: data0.categoryData,
+            scale: true,
+            boundaryGap : true,
+            axisLine: {onZero: false},
+            splitLine: {show: false},
+            splitNumber: 20,
+            min: 'dataMin',
+            max: 'dataMax',
+            gridIndex: 1
+        }],
+        yAxis: [{
             scale: true,
             splitArea: {
                 show: true
             }
-        },
+        }, {
+            name: '万股',
+            nameLocation: 'start',
+            nameGap: 30,
+            gridIndex: 1,
+            axisLabel: {
+                formatter(value, index) {
+                    return value / 10000;
+                }
+            }
+        }],
         dataZoom: [
             {
                 type: 'inside',
                 start: 50,
-                end: 100
+                end: 100,
+                xAxisIndex: [0, 1]
             },
             {
                 show: true,
                 type: 'slider',
                 y: '90%',
                 start: 50,
-                end: 100
+                end: 100,
+                xAxisIndex: [0, 1]
             }
         ],
         series: [
@@ -181,6 +230,27 @@
                         borderColor0: 'green'
                     }
                 }
+            }, {
+                type: 'bar',
+                xAxisIndex: 1,
+                yAxisIndex: 1,
+                data: data0.volume,
+                itemStyle: {
+                    normal: {
+                        color: function(params) {
+                            return params.data.color;
+                        }
+                    }
+                }
+            }, {
+                type: 'line',
+                symbolSize: 0,
+                lineStyle: {
+                    normal: {
+                        color: 'orange'
+                    }
+                },
+                data: data0.ma
             }
         ],
         animation: false
