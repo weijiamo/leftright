@@ -153,12 +153,12 @@
         grid: [{
             left: 60,
             right: 5,
-            height: '40%'
+            height: '35%'
         }, {
             left: 60,
             right: 5,
-            height: '20%',
-            top: '60%'
+            height: '15%',
+            top: '65%'
         }],
         xAxis: [{
             type: 'category',
@@ -195,6 +195,7 @@
             nameLocation: 'start',
             nameGap: 30,
             gridIndex: 1,
+            splitNumber: 1,
             axisLabel: {
                 formatter(value, index) {
                     return value / 10000;
