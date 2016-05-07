@@ -1,21 +1,20 @@
 <template>
-  <div class="st-stock">
-    <stock-navi></stock-navi>
-    <stock-detail></stock-detail>
-    <stock-transaction></stock-transaction>
+  <div class="st-pano">
+    <pano-tools></pano-tools>
+    <pano-main></pano-detail>
   </div>
+  <pano-cards></pano-cards>
 </template>
 
 <script>
-  import stockNavi from './stockNavi.vue'
-  import stockDetail from './stockDetail.vue'
-  import stockTransaction from './stockTransaction.vue'
-  
+  import panoTools from './panoTools.vue'
+  import panoMain from './panoMain.vue'
+  import panoCards from './panoCards.vue'
   export default {
     components: {
-      stockNavi,
-      stockDetail,
-      stockTransaction
+      panoTools,
+      panoMain,
+      panoCards
     },
     data: {
     },
@@ -44,20 +43,12 @@
 </script>
 
 <style>
-  .st-stock {
+  .st-pano {
     ##F9F9F7
     background: red;
   }
 
   body {
     background: #F9F9F7;
-  }
-  .st-content {
-    padding-left: 1rem;
-    padding-right: 1rem;
-    background: white;
-  }
-  .st-content-landscop {
-    background: white;
   }
 </style>

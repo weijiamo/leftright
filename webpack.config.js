@@ -16,7 +16,7 @@ module.exports = {
       {test: /\.vue$/, loader: 'vue' },
       {
       	test: /\.js$/,
-        exclude: /node_modules|vue\/src|vue-router\/|vue-loader\/|vue-hot-reload-api\//,
+        exclude: /node_modules|vue\/src|vue-strap\/src|vue-router\/|vue-loader\/|vue-hot-reload-api\//,
       	loader: 'babel'
       },
       { test: /\.css$/, loader: "style-loader!css-loader?root=./docs/" }

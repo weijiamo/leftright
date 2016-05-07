@@ -4,6 +4,7 @@ require('prismjs')
 require('./js/showLanguage')
 
 import stockView from './components/StockView.vue'
+import panoView from './components/panorama/panoView.vue'
 import welcome from './components/welcome.vue'
 import deviceStatus from './components/deviceStatus.vue'
 
@@ -32,7 +33,8 @@ var app = new Vue({
   components: {
     'deviceStatus': deviceStatus,
     'welcome': welcome,
-    'stockView': stockView
+    'stockView': stockView,
+    'panoView': panoView
   },
   data() {
     return {
@@ -52,4 +54,4 @@ var app = new Vue({
   }
 })
 
-app.currentView = 'welcome'
+app.currentView = 'stockView'

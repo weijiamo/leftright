@@ -85,11 +85,14 @@
   
   <div id="wrapper">
     <container>
-      <div>
+      <!--div>
         <device-status v-show="showDeviceStatus"></device-status>
         <welcome v-show="showWelcome"></welcome>
         <stock-view v-show="showStock"></stock-view>
-      </div>
+      </div-->
+      <component :is="currentView">
+        <!-- component changes when vm.currentview changes! -->
+      </component>
     </container>
   </div>
   <!-- using cdn version here so it works under gh-pages -->

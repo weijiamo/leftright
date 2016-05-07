@@ -65,7 +65,7 @@
     ]
   },
   "scripts": {
-    "st": "webpack-dev-server --inline --hot --quiet --host 10.0.0.129",
+    "st": "webpack-dev-server --inline --hot --quiet --host localhost",
     "buildst": "webpack --progress --hide-modules && NODE_ENV=production webpack --progress --hide-modules",
     "build": "webpack --progress --hide-modules --config  webpack.build.min.js && webpack --progress --hide-modules --config  webpack.build.js"
   },
