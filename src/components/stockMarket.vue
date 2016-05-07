@@ -27,6 +27,10 @@
 </script>
 
 <style>
+  .st-stock-detail .nav-tabs {
+    margin-bottom: 1rem;
+  }
+
   .st-stock-market-price {
     height: 3.0rem;
     font-size: 2rem;
@@ -34,5 +38,6 @@
     padding-top: 0.5rem;
     #background: yellow;
     background: white;
+    color: red;
   }
 </style>
