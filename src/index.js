@@ -42,4 +42,4 @@ var app = new Vue({
   }
 })
 
-app.currentView = 'stockView'
+app.currentView = 'panoView'
