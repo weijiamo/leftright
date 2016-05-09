@@ -130,6 +130,8 @@
             left: 'center'
         },
         tooltip: {
+            show: false,
+            showContent: false,
             axisPointer: {
                 type: 'cross',
                 crossStyle: {
@@ -139,7 +141,7 @@
             },
             alwaysShowContent: true,
             trigger: 'axis',
-            triggerOn: 'click',
+            // triggerOn: 'click',
             position: [0, 0],
             extraCssText: 'right: 0',
             formatter: function(params) {
@@ -151,11 +153,11 @@
             }.bind(this)
         },
         grid: [{
-            left: 60,
+            left: 40,
             right: 5,
-            height: '35%'
+            height: '45%'
         }, {
-            left: 60,
+            left: 40,
             right: 5,
             height: '15%',
             top: '65%'
@@ -170,6 +172,12 @@
             splitNumber: 20,
             min: 'dataMin',
             max: 'dataMax',
+            axisLine: {
+                show: false
+            },
+            axisTick: {
+                show: false
+            },
             axisLabel: {
                 show: false
             }
@@ -187,8 +195,15 @@
         }],
         yAxis: [{
             scale: true,
+            splitNumber: 3,
             splitArea: {
                 show: true
+            },
+            axisTick: {
+                show: false
+            },
+            axisLine: {
+                show: false
             }
         }, {
             name: '万股',
@@ -196,9 +211,19 @@
             nameGap: 30,
             gridIndex: 1,
             splitNumber: 1,
+            splitLine: {
+                show: false
+            },
+            axisTick: {
+                show: false
+            },
+            axisLine: {
+                show: false
+            },
             axisLabel: {
                 formatter(value, index) {
-                    return value / 10000;
+                    // return value / 10000;
+                    return '';
                 }
             }
         }],
@@ -220,7 +245,6 @@
         ],
         series: [
             {
-                name: '上证指数',
                 type: 'candlestick',
                 data: data0.values,
                 itemStyle: {
@@ -270,9 +294,6 @@
     myChart.on('touchend', function(e) {
         console.log(e);
     });
-    myChart.on('mousedown', function(e) {
-        console.log(e);
-    })
     setTimeout(function() {
         myChart.resize();
     }, 500);
