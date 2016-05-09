@@ -26,6 +26,12 @@
     },
     data: {
     },
+    events: {
+      'show-stock': function(data) {
+        console.log(data);
+        this.$broadcast('show-stock', data);
+      }
+    },
     methods: {
       swipe: function(event, msg) {
         //event.preventDefault()

@@ -111,7 +111,8 @@
       },
       goStock: function (entry) {
         //this.$root.currentView = 'stockView'
-        this.$parent.$parent.$parent.$parent.$parent.$parent.$parent.$parent.$refs.maintabs.activeIndex = 1;
+        this.$root.$children[0].$refs.maintabs.activeIndex = 1;
+        this.$dispatch('show-stock', entry);
       }
     },
     components: {
