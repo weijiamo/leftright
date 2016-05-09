@@ -16,7 +16,7 @@ var VueTouch = require('vue-touch')
 Vue.use(VueTouch)
 Vue.config.debug = true
 
-var app = new Vue({
+var stApp = new Vue({
   el: '#wrapper',
   components: {
     'deviceStatus': deviceStatus,
@@ -42,4 +42,4 @@ var app = new Vue({
   }
 })
 
-app.currentView = 'panoView'
+stApp.currentView = 'panoView'

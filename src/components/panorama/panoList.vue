@@ -28,7 +28,8 @@
           <tr v-for="
             entry in data
             | filterBy filterKey
-            | orderBy sortKey sortOrders[sortKey]">
+            | orderBy sortKey sortOrders[sortKey]"
+            @click="goStock(entry)">
             <td v-for="key in columns">
               {{entry[key]}}
             </td>
@@ -46,24 +47,54 @@
       this.columnsName = ['名称','价格','涨跌幅']
       this.columns = ['name', 'price', 'ratio'];
       this.data = [
-        { name: 'Chuck Norris', price: Infinity, ratio: '10%'},
-        { name: 'Bruce Lee', price: 9000, ratio: '10%'},
-        { name: 'Jackie Chan', price: 7000, ratio: '10%'},
-        { name: 'Jackie Chan', price: 7000, ratio: '10%'},
-        { name: 'Jackie Chan', price: 7000, ratio: '10%'},
-        { name: 'Jackie Chan', price: 7000, ratio: '10%'},
-        { name: 'Jackie Chan', price: 7000, ratio: '10%'},
-        { name: 'Jackie Chan', price: 7000, ratio: '10%'},
-        { name: 'Jackie Chan', price: 7000, ratio: '10%'},
-        { name: 'Jackie Chan', price: 7000, ratio: '10%'},
-        { name: 'Jackie Chan', price: 7000, ratio: '10%'},
-        { name: 'Jackie Chan', price: 7000, ratio: '10%'},
-        { name: 'Jackie Chan', price: 7000, ratio: '10%'},
-        { name: 'Jackie Chan', price: 7000, ratio: '10%'},
-        { name: 'Jackie Chan', price: 7000, ratio: '10%'},
-        { name: 'Jackie Chan', price: 7000, ratio: '10%'},
-        { name: 'Jackie Chan', price: 7000, ratio: '10%'},
-        { name: 'Jet Li', price: 8000, ratio: '10%'}
+        { name: '中国石油', price: 100, ratio: '11%'},
+        { name: '中国石化', price: 24, ratio: '12%'},
+        { name: '大江股份', price: 22, ratio: '10%'},
+        { name: '佐丹奴', price: 10, ratio: '14%'},
+        { name: '甲醛A', price: 2, ratio: '11%'},
+        { name: '丽江旅游', price: 30, ratio: '11%'},
+        { name: '腾讯控股', price: 10, ratio: '12%'},
+        { name: '联想控股', price: 15.1, ratio: '13%'},
+        { name: '中国石油', price: 100, ratio: '11%'},
+        { name: '中国石化', price: 24, ratio: '12%'},
+        { name: '大江股份', price: 22, ratio: '10%'},
+        { name: '佐丹奴', price: 10, ratio: '14%'},
+        { name: '甲醛A', price: 2, ratio: '11%'},
+        { name: '丽江旅游', price: 30, ratio: '11%'},
+        { name: '腾讯控股', price: 10, ratio: '12%'},
+        { name: '联想控股', price: 15.1, ratio: '13%'},
+        { name: '中国石油', price: 100, ratio: '11%'},
+        { name: '中国石化', price: 24, ratio: '12%'},
+        { name: '大江股份', price: 22, ratio: '10%'},
+        { name: '佐丹奴', price: 10, ratio: '14%'},
+        { name: '甲醛A', price: 2, ratio: '11%'},
+        { name: '丽江旅游', price: 30, ratio: '11%'},
+        { name: '腾讯控股', price: 10, ratio: '12%'},
+        { name: '联想控股', price: 15.1, ratio: '13%'},
+        { name: '中国石油', price: 100, ratio: '11%'},
+        { name: '中国石化', price: 24, ratio: '12%'},
+        { name: '大江股份', price: 22, ratio: '10%'},
+        { name: '佐丹奴', price: 10, ratio: '14%'},
+        { name: '甲醛A', price: 2, ratio: '11%'},
+        { name: '丽江旅游', price: 30, ratio: '11%'},
+        { name: '腾讯控股', price: 10, ratio: '12%'},
+        { name: '联想控股', price: 15.1, ratio: '13%'},
+        { name: '中国石油', price: 100, ratio: '11%'},
+        { name: '中国石化', price: 24, ratio: '12%'},
+        { name: '大江股份', price: 22, ratio: '10%'},
+        { name: '佐丹奴', price: 10, ratio: '14%'},
+        { name: '甲醛A', price: 2, ratio: '11%'},
+        { name: '丽江旅游', price: 30, ratio: '11%'},
+        { name: '腾讯控股', price: 10, ratio: '12%'},
+        { name: '联想控股', price: 15.1, ratio: '13%'},
+        { name: '中国石油', price: 100, ratio: '11%'},
+        { name: '中国石化', price: 24, ratio: '12%'},
+        { name: '大江股份', price: 22, ratio: '10%'},
+        { name: '佐丹奴', price: 10, ratio: '14%'},
+        { name: '甲醛A', price: 2, ratio: '11%'},
+        { name: '丽江旅游', price: 30, ratio: '11%'},
+        { name: '腾讯控股', price: 10, ratio: '12%'},
+        { name: '联想控股', price: 15.1, ratio: '13%'}
       ];
       this.columns.forEach(function (key) {
         sortOrders[key] = 1
@@ -77,6 +108,9 @@
       sortBy: function (key) {
         this.sortKey = key
         this.sortOrders[key] = this.sortOrders[key] * -1
+      },
+      goStock: function (entry) {
+        this.$root.currentView = 'stockView'
       }
     },
     components: {
@@ -88,7 +122,7 @@
 <style>
   .st-pano-list{
     height: 28rem;
-    font-size: 1rem;
+    font-size: 1.5rem;
     margin-top: 1rem;
   }
 
@@ -110,8 +144,9 @@
 
   .st-pano-list table {
     #border: 2px solid #42b983;
-    border-radius: 3px;
+    border-radius: 0.5rem;
     background-color: #fff;
+    border-spacing: 0.5rem;
   }
 
   .st-pano-list th {
@@ -135,7 +170,7 @@
 
   .st-pano-list td {
     min-width: 8.5rem;
-    padding: 1rem 1rem;
+    padding: 0.5rem 0.5rem;
   }
 
   .st-pano-list th.active {
@@ -151,7 +186,7 @@
     vertical-align: middle;
     width: 0;
     height: 0;
-    margin-left: 5px;
+    margin-left: 0.5rem;
     opacity: 0.66;
   }
 
@@ -165,9 +200,5 @@
     border-left: 4px solid transparent;
     border-right: 4px solid transparent;
     border-top: 4px solid #fff;
-  }
-
-  .st-pano-list #search {
-    margin-bottom: 10px;
   }
 </style>

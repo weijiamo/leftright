@@ -1,7 +1,7 @@
 <template>
   <table style="width:100%" class="st-stock-navi-back">
     <tr>
-      <td style="width:10%"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span></td>
+      <td style="width:10%"><span v-on:click="goPano" class="glyphicon glyphicon-menu-left" aria-hidden="true"></span></td>
       <td style="width:10%"></td>
       <td style="width:60%">
         <div class="st-stock-navi-title1">腾讯控股</div>
@@ -36,6 +36,9 @@
           i = i - random
           return random
         })
+      },
+      goPano: function (event) {
+        this.$root.currentView = 'panoView'
       }
     }
   }
