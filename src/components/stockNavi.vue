@@ -38,7 +38,8 @@
         })
       },
       goPano: function (event) {
-        this.$root.currentView = 'panoView'
+        //this.$root.currentView = 'panoView'
+        this.$parent.$parent.$parent.$parent.$refs.maintabs.activeIndex = 0
       }
     }
   }
@@ -74,5 +75,8 @@
     font-size: 1.5rem;
     text-align: center;
     background: #FFFFFF;
+  }
+  .st-main ul {
+    display: none;
   }
 </style>

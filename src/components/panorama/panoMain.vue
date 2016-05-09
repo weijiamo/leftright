@@ -1,6 +1,6 @@
 <template>
   <div class="st-pano-main">
-      <tabs v-ref:myTabs>
+      <tabs>
         <tab header="全部">
           <pano-aggregated></pano-aggregated>
         </tab>
@@ -71,9 +71,9 @@
   .st-pano-main li a{
     padding: 0.2rem 0.5rem
   }
-
-  .st-pano-main .nav-tabs {
+  .st-pano-main ul {
     margin-bottom: 0px;
+    display: block;
   }
   .st-pano-main {
     #height: 85rem;

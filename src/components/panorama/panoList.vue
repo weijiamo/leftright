@@ -110,7 +110,8 @@
         this.sortOrders[key] = this.sortOrders[key] * -1
       },
       goStock: function (entry) {
-        this.$root.currentView = 'stockView'
+        //this.$root.currentView = 'stockView'
+        this.$parent.$parent.$parent.$parent.$parent.$parent.$parent.$parent.$refs.maintabs.activeIndex = 1;
       }
     },
     components: {

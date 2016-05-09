@@ -7,6 +7,7 @@ import stockView from './components/StockView.vue'
 import panoView from './components/panorama/panoView.vue'
 import welcome from './components/welcome.vue'
 import deviceStatus from './components/deviceStatus.vue'
+import mainView from './components/mainView.vue'
 
 var filters = require('./utils/filters.js');
 Vue.use(filters);
@@ -22,15 +23,12 @@ var stApp = new Vue({
     'deviceStatus': deviceStatus,
     'welcome': welcome,
     'stockView': stockView,
-    'panoView': panoView
+    'panoView': panoView,
+    'mainView': mainView
   },
   data() {
     return {
-      currentView: 'panoView',
-      anchor: [],
-      showWelcome: false,
-      showStock: true,
-      showDeviceStatus: true
+      currentView: 'mainView'
     }
   },
   filters: {
@@ -42,4 +40,4 @@ var stApp = new Vue({
   }
 })
 
-stApp.currentView = 'panoView'
+stApp.currentView = 'mainView'
