@@ -1,7 +1,7 @@
 <template>
   <div class="st-pano">
     <pano-tools></pano-tools>
-    <pano-main></pano-detail>
+    <pano-main></pano-Main>
   </div>
   <pano-cards></pano-cards>
 </template>
@@ -23,7 +23,7 @@
         //event.preventDefault()
         //event.stopPropagation()
         //console.log(this.$refs.mytabs);
-        var index = this.$refs.mytabs.activeIndex;
+        /*var index = this.$refs.mytabs.activeIndex;
         if (msg == 'left') {
           index++;
           if (this.$refs.mytabs.$children.length <= index) {
@@ -36,7 +36,7 @@
             }
         }
         console.log(index);   
-        this.$refs.mytabs.activeIndex = index;
+        this.$refs.mytabs.activeIndex = index;*/
       }
     }
   }

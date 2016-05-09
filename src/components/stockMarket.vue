@@ -39,5 +39,6 @@
     #background: yellow;
     background: white;
     color: red;
+    padding-left: 1rem;
   }
 </style>

@@ -38,7 +38,7 @@ var app = new Vue({
   },
   data() {
     return {
-      currentView: 'stockView',
+      currentView: 'panoView',
       anchor: [],
       showWelcome: false,
       showStock: true,

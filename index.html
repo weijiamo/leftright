@@ -76,6 +76,32 @@
   </style>
 </head>
 <body>
+  <script type="text/x-template" id="grid-template">
+    <table>
+      <thead>
+        <tr>
+          <th v-for="key in columnsName"
+            @click="sortBy(key)"
+            :class="{active: sortKey == key}">
+            {{key | capitalize}}
+            <span class="arrow"
+              :class="sortOrders[key] > 0 ? 'asc' : 'dsc'">
+            </span>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="
+          entry in data
+          | filterBy filterKey
+          | orderBy sortKey sortOrders[sortKey]">
+          <td v-for="key in columns">
+            {{entry[key]}}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </script>
   <div class="welcome">敬請期待
     <div class="module" id="module1">模塊1</div>
     <div class="module" id="module2">模塊2</div>
