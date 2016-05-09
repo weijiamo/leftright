@@ -1,8 +1,22 @@
 <template>
+    <div class="k-nav">
+        <div
+            v-for="r in freqData"
+            v-bind:class="{
+              'active': ($index === active),
+              'row-item': true
+            }"
+            @click.prevent="handleTabListClick($index, r)"
+        >
+            <span>  
+                <slot name="header"> 
+                  {{ r }}
+                </slot> 
+            </span>
+        </div>
+    </div>
     <div class="chart-container">
-      <div id="canvas" class="chart-canvas" 
-    >
-      </div>
+      <div id="canvas" class="chart-canvas"></div>
       <div class="tooltip" v-el:tooltip>
         <div class="tooltip-body">
             <div class="tooltip-item">
@@ -27,6 +41,14 @@
 </template>
 
 <script>
+  // var echarts = require('echarts');
+  // 引入 ECharts 主模块
+    var echarts = require('echarts/lib/echarts');
+    require('echarts/lib/chart/line')
+    require('echarts/lib/chart/bar')
+    require('echarts/lib/chart/candlestick');
+    var tooltip = require('echarts/lib/component/tooltip');
+    require('echarts/lib/component/dataZoom');
   export default {
   components: {
   },
@@ -37,10 +59,15 @@
             closeprice: 0,
             highprice: 0,
             lowprice: 0
-        }
+        },
+        active: 0,
+        freqData: ['分时', '五日', '日K', '周K', '月K']
     }
   },
   methods: {
+    handleTabListClick(index, r) {
+        this.active = index;
+    },
     onPan(e) {
         console.log(e);
         return;
@@ -72,6 +99,43 @@
                 // 结束位置的数值
                 // endValue: number
             });
+    },
+    timeTrend() {
+        var data = {
+            categoryData: []
+        };
+        var option = {
+            grid: {
+                top: 10,
+                left: 40,
+                right: 5,
+                height: '85%'
+            },
+            xAxis: {
+                type: 'category',
+                data: data.categoryData,
+                scale: true,
+                boundaryGap : true,
+                axisLine: {onZero: false},
+                splitLine: {show: false},
+                splitNumber: 20,
+                min: 'dataMin',
+                max: 'dataMax'
+            },
+            yAxis: {
+                scale: true,
+                splitNumber: 3,
+                splitArea: {
+                    show: true
+                },
+                axisTick: {
+                    show: false
+                },
+                axisLine: {
+                    show: false
+                }
+            }
+        }
     }
   },
   computed: {
@@ -130,8 +194,8 @@
             left: 'center'
         },
         tooltip: {
-            show: false,
-            showContent: false,
+            show: true,
+            showContent: true,
             axisPointer: {
                 type: 'cross',
                 crossStyle: {
@@ -155,12 +219,13 @@
         grid: [{
             left: 40,
             right: 5,
+            top: 10,
             height: '45%'
         }, {
             left: 40,
             right: 5,
             height: '15%',
-            top: '65%'
+            top: '55%'
         }],
         xAxis: [{
             type: 'category',
@@ -338,4 +403,25 @@
     bottom: 30px;
     z-index: 10;
   }
+
+      .k-nav {
+        display: flex;
+    }
+
+    .row-item {
+        flex: 1;
+    }
+
+    .k-nav .row-item {
+        text-align: center;
+    }
+
+    .active {
+        color: #b88845;
+    }
+    .k-nav {
+        height: 50px;
+        line-height: 50px;
+    }
+
 </style>
