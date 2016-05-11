@@ -1,5 +1,34 @@
 <template>
-    <div class="k-nav">
+    <div class="k-navs">
+        <tabs v-ref:kTabs>
+            <tab header="分时">
+                <div class="chart-container">
+                    <div class="chart-canvas time-trend"></div>
+                </div>
+            </tab>
+            <tab header="五日">
+                <div class="chart-container">
+                    <div class="chart-canvas five-days"></div>
+                </div>
+            </tab>
+            <tab header="日K">
+                <div class="chart-container">
+                    <div class="chart-canvas daily"></div>
+                </div>
+            </tab>
+            <tab header="周K">
+                <div class="chart-container">
+                    <div class="chart-canvas weekly"></div>
+                </div>
+            </tab>
+            <tab header="月K">
+                <div class="chart-container">
+                    <div class="chart-canvas monthly"></div>
+                </div>
+            </tab>
+        </tabs>
+    </div>
+<!--     <div class="k-nav">
         <div
             v-for="r in freqData"
             v-bind:class="{
@@ -14,8 +43,8 @@
                 </slot> 
             </span>
         </div>
-    </div>
-    <div class="chart-container">
+    </div> -->
+<!--     <div class="chart-container">
       <div id="canvas" class="chart-canvas"></div>
       <div class="tooltip" v-el:tooltip>
         <div class="tooltip-body">
@@ -24,33 +53,38 @@
                 <div>{{tooltip.openprice | digit}}</div>
             </div>
             <div class="tooltip-item">
-                <div>收盘价</div>
+                <div>收盘�/div>
                 <div>{{tooltip.closeprice | digit}}</div>
             </div>
             <div class="tooltip-item">
-                <div>最高</div>
+                <div>最�/div>
                 <div>{{tooltip.highprice | digit}}</div>
             </div>
             <div class="tooltip-item">
-                <div>最低</div>
+                <div>最�/div>
                 <div>{{tooltip.lowprice | digit}}</div>
             </div>
         </div>
     </div>
-    </div>
+    </div> -->
 </template>
 
 <script>
+  import tabs from 'vue-strap/src/Tabset.vue'
+  import tab from 'vue-strap/src/Tab.vue'
 // var echarts = require('echarts');
-// 引入 ECharts 主模块
+// 引入 ECharts 主模�
 var echarts = require('echarts/lib/echarts');
 require('echarts/lib/chart/line')
 require('echarts/lib/chart/bar')
 require('echarts/lib/chart/candlestick');
-var tooltip = require('echarts/lib/component/tooltip');
+// require('echarts/lib/component/tooltip');
 require('echarts/lib/component/dataZoom');
+// require('./tooltip/TooltipView.js');
 export default {
-    components: {},
+    components: {
+        tabs, tab
+    },
     data() {
         return {
             tooltip: {
@@ -60,6 +94,9 @@ export default {
                 lowprice: 0
             },
             active: 0,
+            kData: {},
+            kCharts: [],
+            timeCharts: [],
             freqData: ['分时', '五日', '日K', '周K', '月K']
         }
     },
@@ -97,15 +134,15 @@ export default {
             }
             this.chart.dispatchAction({
                 type: 'dataZoom',
-                // 可选，dataZoom 组件的 index，多个 dataZoom 组件时有用，默认为 0
+                // 可选，dataZoom 组件�index，多�dataZoom 组件时有用，默认�0
                 dataZoomIndex: 0,
                 // 开始位置的百分比，0 - 100
                 start: dataZoom.start + beta,
-                // 结束位置的百分比，0 - 100
+                // 结束位置的百分比� - 100
                 end: dataZoom.end + beta,
-                // 开始位置的数值
+                // 开始位置的数�
                 // startValue: number,
-                // 结束位置的数值
+                // 结束位置的数�
                 // endValue: number
             });
         },
@@ -161,52 +198,22 @@ export default {
                 values: values
             };
         },
-        drawCandlestick() {
-            var raw = require('./../data/monthly.js');
-            var data0 = this.extractData(raw);
-
+        getKChartOptions() {
             var option = {
-                title: {
-                    show: false,
-                    text: '上证指数',
-                    left: 'center'
-                },
-                tooltip: {
-                    showContent: false,
-                    axisPointer: {
-                        type: 'cross',
-                        crossStyle: {
-                            type: 'solid',
-                            color: '#000'
-                        }
-                    },
-                    alwaysShowContent: true,
-                    trigger: 'axis',
-                    // triggerOn: 'click',
-                    position: [0, 0],
-                    extraCssText: 'right: 0',
-                    formatter: function(params) {
-                        this.tooltip.openprice = params.data[0];
-                        this.tooltip.closeprice = params.data[1];
-                        this.tooltip.highprice = params.data[2];
-                        this.tooltip.lowprice = params.data[3];
-                        return this.$els.tooltip.innerHTML;
-                    }.bind(this)
-                },
                 grid: [{
                     left: 40,
                     right: 5,
                     top: 10,
-                    height: '45%'
+                    height: '50%'
                 }, {
                     left: 40,
                     right: 5,
-                    height: '15%',
+                    height: '20%',
                     top: '55%'
                 }],
                 xAxis: [{
                     type: 'category',
-                    data: data0.categoryData,
+                    data: [],
                     scale: true,
                     boundaryGap: true,
                     axisLine: { onZero: false },
@@ -225,7 +232,7 @@ export default {
                     }
                 }, {
                     type: 'category',
-                    data: data0.categoryData,
+                    data: [],
                     scale: true,
                     boundaryGap: true,
                     axisLine: { onZero: false },
@@ -233,7 +240,12 @@ export default {
                     splitNumber: 20,
                     min: 'dataMin',
                     max: 'dataMax',
-                    gridIndex: 1
+                    gridIndex: 1,
+                    axisLabel: {
+                        formatter(val) {
+                            return val && val.substr(2);
+                        }
+                    }
                 }],
                 yAxis: [{
                     scale: true,
@@ -248,9 +260,6 @@ export default {
                         show: false
                     }
                 }, {
-                    name: '万股',
-                    nameLocation: 'start',
-                    nameGap: 30,
                     gridIndex: 1,
                     splitNumber: 1,
                     splitLine: {
@@ -264,14 +273,13 @@ export default {
                     },
                     axisLabel: {
                         formatter(value, index) {
-                            // return value / 10000;
                             return '';
                         }
                     }
                 }],
                 dataZoom: [{
                     type: 'inside',
-                    start: 50,
+                    start: 80,
                     end: 100,
                     xAxisIndex: [0, 1]
                 }, {
@@ -284,7 +292,7 @@ export default {
                 }],
                 series: [{
                     type: 'candlestick',
-                    data: data0.values,
+                    data: [],
                     itemStyle: {
                         normal: {
                             color: 'red',
@@ -297,7 +305,7 @@ export default {
                     type: 'bar',
                     xAxisIndex: 1,
                     yAxisIndex: 1,
-                    data: data0.volume,
+                    data: [],
                     itemStyle: {
                         normal: {
                             color: function(params) {
@@ -313,11 +321,17 @@ export default {
                             color: 'orange'
                         }
                     },
-                    data: data0.ma
+                    data: []
                 }],
                 animation: false
             };
-
+            return option;
+        },
+        drawCandlestick(freq) {
+            if(this.kData[freq]) {
+                return;
+            }
+            var option = this.getKChartOptions();
             function formatDate(data) {
                 for (var i = 0; i < data.length; i++) {
                     var item = data[i];
@@ -326,15 +340,59 @@ export default {
                 }
                 return data;
             };
-            var myChart = echarts.init(document.getElementById('canvas'));
+            var domCls = ['.daily', '.weekly', '.monthly'];
+            var myChart = echarts.init(document.querySelector(domCls[freq]));
             myChart.setOption(option);
             setTimeout(function() {
                 myChart.resize();
             }, 0);
-            window.onresize = myChart.resize;
-            this.chart = myChart;
+            window.addEventListener('resize', function() {
+                myChart.resize();
+            })
+            this.kCharts[freq] = myChart;
+
+            function setData(data) {
+                var initItemCount = 50;
+                var zoomStart = 100 - (initItemCount / data.categoryData.length) * 100;
+                myChart.setOption({
+                    xAxis: [{
+                        data: data.categoryData
+                    }, {
+                        data: data.categoryData
+                    }],
+                    series: [{
+                        data: data.values
+                    }, {
+                        data: data.volume
+                    }],
+                    dataZoom: [{
+                        start: zoomStart
+                    }, {
+                        start: zoomStart
+                    }]
+                })
+            }
+            myChart.showLoading();
+            this.$http({
+                url: 'http://139.196.107.119/service/marketSecuKLine',
+                method: 'GET',
+                params: {
+                    exchgid: 0,
+                    securitycode: '00700',
+                    klinetype: freq || 0
+                },
+                timeout: 15000
+            }).then(function(response) {
+                myChart.hideLoading();
+                console.log(response.data);
+                var data = this.extractData(response.data.data);
+                setData(data);
+                this.kData[freq] = data;
+            }.bind(this), function(err) {
+                myChart.hideLoading();
+            });
         },
-        drawTimeTrend() {
+        drawTimeTrend(freq) {
             var raw = require('./../data/timetrend.js');
             var data = this.extractTimeTrendData(raw);
             var option = {
@@ -391,23 +449,29 @@ export default {
                     data: data.values
                 }]
             }
-            var myChart = echarts.init(document.getElementById('canvas'));
+            var myChart = echarts.init(document.querySelector('.time-trend'));
             myChart.setOption(option);
             setTimeout(function() {
                 myChart.resize();
             }, 0);
-            window.onresize = myChart.resize;
-            this.chart = myChart;
+            window.addEventListener('resize', function() {
+                myChart.resize();
+            });
+            this.timeCharts[freq] = myChart;
         }
     },
     computed: {
-        // a computed getter
-        deviceWidth: function() {
-            return window.screen.width
-        }
+        
     },
     ready: function(event, msg) {
-        
+        this.$refs.ktabs.$watch('activeIndex', function(v) {
+            console.log(v);
+            if(v < 2) {
+                this.drawTimeTrend(v);
+            } else {
+                this.drawCandlestick(v - 2);
+            }
+        }.bind(this));
     }
 }
 
@@ -467,6 +531,28 @@ export default {
     .k-nav {
         height: 50px;
         line-height: 50px;
+    }
+    .k-navs li {
+        width: 20%;
+        text-align: center;
+    }
+
+    .k-navs .nav-tabs>li>a {
+        border: none;
+        background: #fff;
+        margin: 0;
+    }
+
+    .k-navs li.active a,
+    .k-navs li.active>a:hover{
+        color: #b88845;
+        background: #fff;
+        border: none;
+    }
+
+    .k-navs .nav > li > a:hover,
+    .k-navs .nav > li > a:focus {
+      background-color: #fff;
     }
 
 </style>

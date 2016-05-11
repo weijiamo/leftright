@@ -45,7 +45,7 @@
   }
 </script>
 
-<style>
+<style scoped>
   .st-stock-navi-back {
     color: #b88845;
     height: 3.5rem;

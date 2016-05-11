@@ -15,6 +15,7 @@ var VueGesture = require('vue-gesture')
 Vue.use(VueGesture)
 var VueTouch = require('vue-touch')
 Vue.use(VueTouch)
+Vue.use(require('vue-resource'))
 Vue.config.debug = true
 
 var stApp = new Vue({

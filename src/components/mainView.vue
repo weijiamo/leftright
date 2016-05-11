@@ -57,5 +57,7 @@
 </script>
 
 <style>
-  
+  .st-main-tabs > ul {
+    display: none;
+  }
 </style>
