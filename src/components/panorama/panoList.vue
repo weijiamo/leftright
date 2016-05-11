@@ -123,7 +123,7 @@
 
 <style>
   .st-pano-list{
-    height: 28rem;
+    height: 25.5rem;
     font-size: 1.5rem;
     margin-top: 1rem;
   }

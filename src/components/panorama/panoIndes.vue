@@ -14,22 +14,22 @@
           <tr>
             <td style="width:33%">
               <div class="st-pano-indes-item">
-                <h4>恒生指数</h4>
-                <h5>20106</h5>
+                <h3>恒生指数</h3>
+                <h4>20106</h4>
                 <h6>-333 -2.0%</h6>
               </div>
             </td>
             <td style="width:33%">
               <div>
-                <h4>国企指数</h4>
-                <h5>20106</h5>
+                <h3>国企指数</h3>
+                <h4>20106</h4>
                 <h6>-333 -2.0%</h6>
               </div>
             </td>
             <td style="width:33%">
               <div>
-                <h4>红筹指数</h4>
-                <h5>20106</h5>
+                <h3>红筹指数</h3>
+                <h4>20106</h4>
                 <h6>-333 -2.0%</h6>
               </div>
             </td> 
@@ -65,7 +65,7 @@
 
 <style>
   .st-pano-indes {
-    height: 10rem;
+    height: 11rem;
     margin-top: 1rem;
   }
   .st-pano-indes-exchanger {
@@ -87,10 +87,10 @@
     height: 1.2rem;
   }
   .st-pano-indes-items {
-    height: 6rem;
+    height: 7rem;
   }
   .st-pano-indes-switch {
-    height: 1rem;
+    height: 2rem;
   }
   .st-pano-indes-item {
     margin: 1rem;
