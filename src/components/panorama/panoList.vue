@@ -9,7 +9,8 @@
           <thead>
               <thead>
                 <tr>
-                  <th v-for="key in columnsName"
+                  <th v-for="key in columnsName" 
+                    class="st-pano-list-th-{{getKey(key)}}
                     @click="sortBy(key)"
                     :class="{active: sortKey == key}">
                     {{key | capitalize}}
@@ -30,7 +31,8 @@
             | filterBy filterKey
             | orderBy sortKey sortOrders[sortKey]"
             @click="goStock(entry)">
-            <td v-for="key in columns">
+            <td v-for="key in columns" 
+              class="st-pano-list-td-{{key}}">
               {{entry[key]}}
             </td>
           </tr>
@@ -46,6 +48,7 @@
       var sortOrders = {}
       this.columnsName = ['名称','价格','涨跌幅']
       this.columns = ['name', 'price', 'ratio'];
+      this.key = 0;
       this.data = [
         { name: '中国石油', price: 100, ratio: '11%'},
         { name: '中国石化', price: 24, ratio: '12%'},
@@ -113,6 +116,10 @@
         //this.$root.currentView = 'stockView'
         this.$root.$children[0].$refs.maintabs.activeIndex = 1;
         this.$dispatch('show-stock', entry);
+      },
+      getKey: function (key1) {
+        this.key++;
+        return this.key;
       }
     },
     components: {
@@ -136,6 +143,7 @@
     width: 100%;
     height: 23rem;
     overflow-y: scroll;
+    #overflow-x: hidden;
   }
   .st-pano-table-head table,.table-body table {
     width:100%;
@@ -164,15 +172,22 @@
   .st-pano-list td {
     background-color: white;
   }
-
   .st-pano-list th {
-    min-width: 10rem;
+    min-width: 9rem;
+    padding: 0.5rem 0.5rem;
+  }
+  .st-pano-list td {
+    min-width: 9rem;
     padding: 0.5rem 0.5rem;
   }
 
-  .st-pano-list td {
-    min-width: 10rem;
-    padding: 0.5rem 0.5rem;
+  .st-pano-list .st-pano-list-td-ratio {
+    min-width: 7rem;
+    text-align: center;
+  }
+  .st-pano-list .st-pano-list-th-3 {
+    min-width: 7rem;
+    padding: 0.5rem 0.5rem; 
   }
 
   .st-pano-list th.active {
