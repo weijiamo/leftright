@@ -278,7 +278,7 @@ export default {
                     show: true,
                     type: 'slider',
                     y: '90%',
-                    start: 50,
+                    start: 90,
                     end: 100,
                     xAxisIndex: [0, 1]
                 }],

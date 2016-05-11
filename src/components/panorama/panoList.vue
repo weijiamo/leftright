@@ -166,12 +166,12 @@
   }
 
   .st-pano-list th {
-    min-width: 8.5rem;
-    padding: 1rem 1rem;
+    min-width: 10rem;
+    padding: 0.5rem 0.5rem;
   }
 
   .st-pano-list td {
-    min-width: 8.5rem;
+    min-width: 10rem;
     padding: 0.5rem 0.5rem;
   }
 
