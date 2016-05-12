@@ -98,4 +98,10 @@
   .st-pano-indes-dotdot {
     text-align: center;
   }
+  .st-pano-indes-items h4{
+    color: #29b32e;
+  }
+  .st-pano-indes-items h6{
+    color: #29b32e;
+  }
 </style>
