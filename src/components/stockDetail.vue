@@ -1,6 +1,6 @@
 <template>
   <div class="st-stock-detail">
-      <tabs v-ref:myTabs>
+      <tabs v-ref:myTabs class="stock-info-tab">
         <tab header="行情">
           <stock-market></stock-market>
         </tab>
@@ -77,5 +77,44 @@
   }
   .st-stock-detail {
     #height: 85rem;
+  }
+
+  .st-stock-detail .nav-tabs>li>a {
+    border: none;
+    background: #fff;
+    margin: 0;
+    padding-bottom: 10px;
+  }
+
+  .nav-tabs>li.active>a, 
+  .nav-tabs>li.active>a:focus, 
+  .nav-tabs>li.active>a:hover {
+    color: #b88845;
+  }
+
+  .st-stock-detail .nav-tabs>li.active>a {
+    color: #b88845;
+  }
+
+  .st-stock-detail li.active a,
+  .st-stock-detail li.active>a:hover{
+      color: #b88845;
+      background: #fff;
+      border: none;
+  }
+
+  .st-stock-detail .nav > li > a:hover,
+  .st-stock-detail .nav > li > a:focus {
+    background-color: #fff;
+  }
+
+  .stock-info-tab > ul li.active a:after {
+    content: '';
+    border: 1px solid #b88845;
+    width: 30%;
+    position: absolute;
+    bottom: 0;
+    margin: auto;
+    left: 35%;
   }
 </style>

@@ -78,7 +78,7 @@ export default {
     methods: {
         onPan(e, chartIndex) {
             console.log(e.overallVelocity, e);
-            // return;
+            return;
             var chart = this.kCharts[chartIndex];
             e.srcEvent.stopPropagation();
             var chartWidth = chart.getWidth();
@@ -99,7 +99,7 @@ export default {
                     beta = 0;
                 }
             }
-            if(Math.abs(beta) < 0.3) {
+            if(true) {
                 chart.dispatchAction({
                     type: 'dataZoom',
                     // 可选，dataZoom 组件的 index，多个 dataZoom 组件时有用，默认为 0
@@ -230,6 +230,10 @@ export default {
                     },
                     axisLabel: {
                         show: false
+                    },
+                    splitArea: {
+                        show: true,
+                        interval: 8
                     }
                 }, {
                     type: 'category',
@@ -278,12 +282,12 @@ export default {
                         }
                     }
                 }],
-                dataZoom: [/*{
+                dataZoom: [{
                     type: 'inside',
                     start: 80,
                     end: 100,
                     xAxisIndex: [0, 1]
-                }, */{
+                }, {
                     show: true,
                     type: 'slider',
                     y: '90%',
@@ -366,9 +370,9 @@ export default {
                     }, {
                         data: data.volume
                     }],
-                    dataZoom: [/*{
+                    dataZoom: [{
                         start: zoomStart
-                    }, */{
+                    }, {
                         start: zoomStart
                     }]
                 })

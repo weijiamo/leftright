@@ -40,16 +40,31 @@
   }
 </script>
 
-<style>
+<style scoped>
   .st-stock-fundamental {
     height: 14rem;
     font-size: 1rem;
     color: #222020;
     text-align: left;
-    #background: #00CCFF;
     background: white;
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
-    padding-left: 2rem;
+    padding: 1rem;
+    margin-bottom: 60px;
+  }
+
+  table {
+    border-collapse: collapse;
+  }
+
+  td {
+    border: 1px solid #ececec;
+    padding-left: 5px;
+  }
+
+  td:first-child {
+    border-left: none;
+  }
+
+  td:last-child {
+    border-right: none;
   }
 </style>
