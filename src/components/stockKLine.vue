@@ -14,7 +14,7 @@
             <tab header="日K">
                 <div class="chart-container">
                     <div class="chart-canvas daily"
-                        v-touch-options:pan="{ direction: 'horizontal'}"
+                        v-touch-options:pan="{ direction: 'horizontal', threshold: 5}"
                         v-touch:pan.prevent.stop="onPan($event, 0)">
                     </div>
                 </div>
@@ -22,7 +22,7 @@
             <tab header="周K">
                 <div class="chart-container">
                     <div class="chart-canvas weekly"
-                        v-touch-options:pan="{ direction: 'horizontal'}"
+                        v-touch-options:pan="{ direction: 'horizontal', threshold: 5}"
                         v-touch:pan.prevent.stop="onPan($event, 1)">
                     </div>
                 </div>
@@ -30,7 +30,7 @@
             <tab header="月K">
                 <div class="chart-container">
                     <div class="chart-canvas monthly"
-                        v-touch-options:pan="{ direction: 'horizontal'}"
+                        v-touch-options:pan="{ direction: 'horizontal', threshold: 5}"
                         v-touch:pan.prevent.stop="onPan($event, 2)">
                     </div>
                 </div>
@@ -67,7 +67,12 @@ export default {
             kCharts: [],
             timeCharts: [],
             panActions: [],
-            timer: 0
+            timer: 0,
+            direction: {
+                left: 0,
+                right: 0
+            },
+            lastPosition: false
         }
     },
     events: {
@@ -77,8 +82,8 @@ export default {
     },
     methods: {
         onPan(e, chartIndex) {
-            console.log(e.overallVelocity, e);
-            return;
+            // console.log(e.overallVelocity, e);
+            // return;
             var chart = this.kCharts[chartIndex];
             e.srcEvent.stopPropagation();
             var chartWidth = chart.getWidth();
@@ -87,7 +92,18 @@ export default {
             if(e.srcEvent.zrY >= chartHeight * 0.9) {
                 return;
             }
-            var beta = e.overallVelocity;
+            var distance = 0;
+            if(!this.lastPosition) {
+                this.lastPosition = e.distance;
+                distance = e.distance;
+            } else {
+                distance = e.distance - this.lastPosition;
+                this.lastPosition = e.distance;
+            }
+
+            var beta = (dataZoom.end - dataZoom.start) * distance / chartWidth;
+            console.log('beta', beta, e.overallVelocity)
+            // var beta = e.overallVelocity;
             if (e.direction === 2) { //left
                 beta = Math.abs(beta);
                 if (dataZoom.end >= 100) {
@@ -99,7 +115,7 @@ export default {
                     beta = 0;
                 }
             }
-            if(true) {
+            if(!e.isFinal) {
                 chart.dispatchAction({
                     type: 'dataZoom',
                     // 可选，dataZoom 组件的 index，多个 dataZoom 组件时有用，默认为 0
@@ -113,38 +129,49 @@ export default {
                     // 结束位置的数值
                     // endValue: number
                 });
-                return;
             }
+            if(e.overallVelocity > 0) {
+                this.direction.right++;
+            } else {
+                this.direction.left++;
+            }
+            // return;
             // beta = beta * 0.3;
             if(e.isFinal) {
+                this.lastPosition = 0;
+                //惯性距离
+                distance = Math.abs(e.overallVelocity) * 50;
+                beta = (dataZoom.end - dataZoom.start) * distance / chartWidth;;
+                if(this.direction.left > this.direction.right) {
+                    beta = Math.abs(beta);
+                } else {
+                    beta = -Math.abs(beta);
+                }
+                this.direction.left = 0;
+                this.direction.right = 0;
+                console.log('final', e.overallVelocity, e);
                 var index = 0;
+                var acc = 0.9;
                 var timer = setInterval(function() {
-                    var action = this.panActions.shift();
-                    if(action) {
-                        action.call();
-                    } else {
+                    dataZoom = chart.getOption().dataZoom[0];
+                    if(beta > 0 && dataZoom.end >= 100) {
+                        beta = 0;
+                    }
+                    if(beta < 0 && dataZoom.start <= 0) {
+                        beta = 0;
+                    }
+                    chart.dispatchAction({
+                        type: 'dataZoom',
+                        dataZoomIndex: 0,
+                        start: dataZoom.start + beta,
+                        end: dataZoom.end + beta
+                    });
+                    beta = beta * acc;
+                    console.log('beta', beta);
+                    if(Math.abs(beta) <= 0.05) {
                         clearInterval(timer);
                     }
                 }.bind(this), 10);
-            } else {
-                this.panActions.push((function(beta) {
-                    return function() {
-                        var dataZoom = chart.getOption().dataZoom[0];
-                        chart.dispatchAction({
-                            type: 'dataZoom',
-                            // 可选，dataZoom 组件的 index，多个 dataZoom 组件时有用，默认为 0
-                            dataZoomIndex: 0,
-                            // 开始位置的百分比，0 - 100
-                            start: dataZoom.start + beta,
-                            // 结束位置的百分比，0 - 100
-                            end: dataZoom.end + beta,
-                            // 开始位置的数值
-                            // startValue: number,
-                            // 结束位置的数值
-                            // endValue: number
-                        });
-                    }
-                })(beta));
             }
         },
         extractData(rawData) {
@@ -282,12 +309,12 @@ export default {
                         }
                     }
                 }],
-                dataZoom: [{
+                dataZoom: [/*{
                     type: 'inside',
                     start: 80,
                     end: 100,
                     xAxisIndex: [0, 1]
-                }, {
+                }, */{
                     show: true,
                     type: 'slider',
                     y: '90%',
@@ -370,9 +397,9 @@ export default {
                     }, {
                         data: data.volume
                     }],
-                    dataZoom: [{
+                    dataZoom: [/*{
                         start: zoomStart
-                    }, {
+                    }, */{
                         start: zoomStart
                     }]
                 })
