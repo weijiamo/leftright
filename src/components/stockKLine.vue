@@ -13,67 +13,37 @@
             </tab>
             <tab header="日K">
                 <div class="chart-container">
-                    <div class="chart-canvas daily"></div>
+                    <div class="chart-canvas daily"
+                        v-touch-options:pan="{ direction: 'horizontal'}"
+                        v-touch:pan.prevent.stop="onPan($event, 0)">
+                    </div>
                 </div>
             </tab>
             <tab header="周K">
                 <div class="chart-container">
-                    <div class="chart-canvas weekly"></div>
+                    <div class="chart-canvas weekly"
+                        v-touch-options:pan="{ direction: 'horizontal'}"
+                        v-touch:pan.prevent.stop="onPan($event, 1)">
+                    </div>
                 </div>
             </tab>
             <tab header="月K">
                 <div class="chart-container">
-                    <div class="chart-canvas monthly"></div>
+                    <div class="chart-canvas monthly"
+                        v-touch-options:pan="{ direction: 'horizontal'}"
+                        v-touch:pan.prevent.stop="onPan($event, 2)">
+                    </div>
                 </div>
             </tab>
         </tabs>
     </div>
-<!--     <div class="k-nav">
-        <div
-            v-for="r in freqData"
-            v-bind:class="{
-              'active': ($index === active),
-              'row-item': true
-            }"
-            @click.prevent="handleTabListClick($index, r)"
-        >
-            <span>  
-                <slot name="header"> 
-                  {{ r }}
-                </slot> 
-            </span>
-        </div>
-    </div> -->
-<!--     <div class="chart-container">
-      <div id="canvas" class="chart-canvas"></div>
-      <div class="tooltip" v-el:tooltip>
-        <div class="tooltip-body">
-            <div class="tooltip-item">
-                <div>开盘价</div>
-                <div>{{tooltip.openprice | digit}}</div>
-            </div>
-            <div class="tooltip-item">
-                <div>收盘�/div>
-                <div>{{tooltip.closeprice | digit}}</div>
-            </div>
-            <div class="tooltip-item">
-                <div>最�/div>
-                <div>{{tooltip.highprice | digit}}</div>
-            </div>
-            <div class="tooltip-item">
-                <div>最�/div>
-                <div>{{tooltip.lowprice | digit}}</div>
-            </div>
-        </div>
-    </div>
-    </div> -->
 </template>
 
 <script>
   import tabs from 'vue-strap/src/Tabset.vue'
   import tab from 'vue-strap/src/Tab.vue'
 // var echarts = require('echarts');
-// 引入 ECharts 主模�
+// 引入 ECharts 主模块
 var echarts = require('echarts/lib/echarts');
 require('echarts/lib/chart/line')
 require('echarts/lib/chart/bar')
@@ -93,11 +63,11 @@ export default {
                 highprice: 0,
                 lowprice: 0
             },
-            active: 0,
             kData: {},
             kCharts: [],
             timeCharts: [],
-            freqData: ['分时', '五日', '日K', '周K', '月K']
+            panActions: [],
+            timer: 0
         }
     },
     events: {
@@ -106,45 +76,76 @@ export default {
         }
     },
     methods: {
-        handleTabListClick(index, r) {
-            this.active = index;
-            if(index < 2) {
-                this.drawTimeTrend();
-            } else {
-                this.drawCandlestick();
-            }
-        },
-        onPan(e) {
-            console.log(e);
-            return;
+        onPan(e, chartIndex) {
+            console.log(e.overallVelocity, e);
+            // return;
+            var chart = this.kCharts[chartIndex];
             e.srcEvent.stopPropagation();
-            var chartWidth = this.chart.getWidth();
-            var dataZoom = this.chart.getOption().dataZoom[0];
-            var beta = parseInt(e.distance / chartWidth * 100);
+            var chartWidth = chart.getWidth();
+            var chartHeight = chart.getHeight();
+            var dataZoom = chart.getOption().dataZoom[0];
+            if(e.srcEvent.zrY >= chartHeight * 0.9) {
+                return;
+            }
+            var beta = e.overallVelocity;
             if (e.direction === 2) { //left
-                beta = -Math.abs(beta);
-                if (dataZoom.start <= 0) {
-                    beta = 0;
-                }
-            } else if (e.direction === 4) { //right
                 beta = Math.abs(beta);
                 if (dataZoom.end >= 100) {
                     beta = 0;
                 }
+            } else if (e.direction === 4) { //right
+                beta = -Math.abs(beta);
+                if (dataZoom.start <= 0) {
+                    beta = 0;
+                }
             }
-            this.chart.dispatchAction({
-                type: 'dataZoom',
-                // 可选，dataZoom 组件�index，多�dataZoom 组件时有用，默认�0
-                dataZoomIndex: 0,
-                // 开始位置的百分比，0 - 100
-                start: dataZoom.start + beta,
-                // 结束位置的百分比� - 100
-                end: dataZoom.end + beta,
-                // 开始位置的数�
-                // startValue: number,
-                // 结束位置的数�
-                // endValue: number
-            });
+            if(Math.abs(beta) < 0.3) {
+                chart.dispatchAction({
+                    type: 'dataZoom',
+                    // 可选，dataZoom 组件的 index，多个 dataZoom 组件时有用，默认为 0
+                    dataZoomIndex: 0,
+                    // 开始位置的百分比，0 - 100
+                    start: dataZoom.start + beta,
+                    // 结束位置的百分比，0 - 100
+                    end: dataZoom.end + beta,
+                    // 开始位置的数值
+                    // startValue: number,
+                    // 结束位置的数值
+                    // endValue: number
+                });
+                return;
+            }
+            // beta = beta * 0.3;
+            if(e.isFinal) {
+                var index = 0;
+                var timer = setInterval(function() {
+                    var action = this.panActions.shift();
+                    if(action) {
+                        action.call();
+                    } else {
+                        clearInterval(timer);
+                    }
+                }.bind(this), 10);
+            } else {
+                this.panActions.push((function(beta) {
+                    return function() {
+                        var dataZoom = chart.getOption().dataZoom[0];
+                        chart.dispatchAction({
+                            type: 'dataZoom',
+                            // 可选，dataZoom 组件的 index，多个 dataZoom 组件时有用，默认为 0
+                            dataZoomIndex: 0,
+                            // 开始位置的百分比，0 - 100
+                            start: dataZoom.start + beta,
+                            // 结束位置的百分比，0 - 100
+                            end: dataZoom.end + beta,
+                            // 开始位置的数值
+                            // startValue: number,
+                            // 结束位置的数值
+                            // endValue: number
+                        });
+                    }
+                })(beta));
+            }
         },
         extractData(rawData) {
             var categoryData = [];
@@ -277,16 +278,16 @@ export default {
                         }
                     }
                 }],
-                dataZoom: [{
+                dataZoom: [/*{
                     type: 'inside',
                     start: 80,
                     end: 100,
                     xAxisIndex: [0, 1]
-                }, {
+                }, */{
                     show: true,
                     type: 'slider',
                     y: '90%',
-                    start: 90,
+                    start: 80,
                     end: 100,
                     xAxisIndex: [0, 1]
                 }],
@@ -365,9 +366,9 @@ export default {
                     }, {
                         data: data.volume
                     }],
-                    dataZoom: [{
+                    dataZoom: [/*{
                         start: zoomStart
-                    }, {
+                    }, */{
                         start: zoomStart
                     }]
                 })
@@ -484,7 +485,7 @@ export default {
   }
 
   .chart-container {
-    height: 19rem;
+    height: 280px;
     position: relative;
   }
 
