@@ -72,7 +72,8 @@ export default {
                 left: 0,
                 right: 0
             },
-            lastPosition: false
+            lastPosition: false,
+            maxVelocity: 0
         }
     },
     events: {
@@ -135,12 +136,18 @@ export default {
             } else {
                 this.direction.left++;
             }
+            if(Math.abs(e.overallVelocity) > Math.abs(this.maxVelocity)) {
+                this.maxVelocity = e.overallVelocity;
+            }
             // return;
             // beta = beta * 0.3;
             if(e.isFinal) {
                 this.lastPosition = 0;
                 //惯性距离
-                distance = Math.abs(e.overallVelocity) * 50;
+                distance = Math.abs(this.maxVelocity) * 250;
+                console.log('last overallVelocity', e.overallVelocity, e);
+                console.log('maxVelocity', this.maxVelocity);
+                this.maxVelocity = 0;
                 beta = (dataZoom.end - dataZoom.start) * distance / chartWidth;;
                 if(this.direction.left > this.direction.right) {
                     beta = Math.abs(beta);
@@ -149,9 +156,8 @@ export default {
                 }
                 this.direction.left = 0;
                 this.direction.right = 0;
-                console.log('final', e.overallVelocity, e);
                 var index = 0;
-                var acc = 0.9;
+                var acc = 0.6;
                 var timer = setInterval(function() {
                     dataZoom = chart.getOption().dataZoom[0];
                     if(beta > 0 && dataZoom.end >= 100) {
@@ -171,7 +177,7 @@ export default {
                     if(Math.abs(beta) <= 0.05) {
                         clearInterval(timer);
                     }
-                }.bind(this), 10);
+                }.bind(this), 50);
             }
         },
         extractData(rawData) {
@@ -259,7 +265,7 @@ export default {
                         show: false
                     },
                     splitArea: {
-                        show: true,
+                        show: false,
                         interval: 8
                     }
                 }, {
