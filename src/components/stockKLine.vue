@@ -85,8 +85,22 @@ export default {
     methods: {
         onPress(e) {
             var chart = this.kCharts[1];
-            // function draw() {
-            //     requestAnimationFrame(draw);
+            function draw(time) {
+                console.log('time', time);
+                var dataZoom = chart.getOption().dataZoom[0];
+                var beta = 3;
+                if(dataZoom.start >= 0) {
+                    chart.dispatchAction({
+                        type: 'dataZoom',
+                        dataZoomIndex: 0,
+                        start: dataZoom.start - beta,
+                        end: dataZoom.end - beta
+                    });
+                    requestAnimationFrame(draw);
+                }
+            }
+            draw();
+            // var timer = setInterval(function() {
             //     var dataZoom = chart.getOption().dataZoom[0];
             //     var beta = 1;
             //     if(dataZoom.start >= 0) {
@@ -96,22 +110,10 @@ export default {
             //             start: dataZoom.start - beta,
             //             end: dataZoom.end - beta
             //         });
+            //     } else {
+            //         clearInterval(timer);
             //     }
-            // }
-            var timer = setInterval(function() {
-                var dataZoom = chart.getOption().dataZoom[0];
-                var beta = 1;
-                if(dataZoom.start >= 0) {
-                    chart.dispatchAction({
-                        type: 'dataZoom',
-                        dataZoomIndex: 0,
-                        start: dataZoom.start - beta,
-                        end: dataZoom.end - beta
-                    });
-                } else {
-                    clearInterval(timer);
-                }
-            }, 20);
+            // }, 20);
         },
         onPan(e, chartIndex) {
             // console.log(e.overallVelocity, e);
