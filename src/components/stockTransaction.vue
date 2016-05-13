@@ -26,8 +26,7 @@
 
 <style>
   .hotspot:hover{
-    /*color: #a87733;*/
-    color:red;
+    color: #a87733;
   }
   .st-stock-transaction {
     height: 4rem;
