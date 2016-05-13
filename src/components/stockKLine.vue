@@ -23,6 +23,7 @@
                 <div class="chart-container">
                     <div class="chart-canvas weekly"
                         v-touch-options:pan="{ direction: 'horizontal', threshold: 5}"
+                        v-touch:press="onPress"
                         v-touch:pan.prevent.stop="onPan($event, 1)">
                     </div>
                 </div>
@@ -82,6 +83,36 @@ export default {
         }
     },
     methods: {
+        onPress(e) {
+            var chart = this.kCharts[1];
+            // function draw() {
+            //     requestAnimationFrame(draw);
+            //     var dataZoom = chart.getOption().dataZoom[0];
+            //     var beta = 1;
+            //     if(dataZoom.start >= 0) {
+            //         chart.dispatchAction({
+            //             type: 'dataZoom',
+            //             dataZoomIndex: 0,
+            //             start: dataZoom.start - beta,
+            //             end: dataZoom.end - beta
+            //         });
+            //     }
+            // }
+            var timer = setInterval(function() {
+                var dataZoom = chart.getOption().dataZoom[0];
+                var beta = 1;
+                if(dataZoom.start >= 0) {
+                    chart.dispatchAction({
+                        type: 'dataZoom',
+                        dataZoomIndex: 0,
+                        start: dataZoom.start - beta,
+                        end: dataZoom.end - beta
+                    });
+                } else {
+                    clearInterval(timer);
+                }
+            }, 20);
+        },
         onPan(e, chartIndex) {
             // console.log(e.overallVelocity, e);
             // return;
@@ -177,7 +208,7 @@ export default {
                     if(Math.abs(beta) <= 0.05) {
                         clearInterval(timer);
                     }
-                }.bind(this), 50);
+                }.bind(this), 10);
             }
         },
         extractData(rawData) {
